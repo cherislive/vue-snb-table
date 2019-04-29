@@ -259,14 +259,12 @@ table
       z-index 8
       overflow hidden
       width 100%
-      background #dfd
     .table-fixed-left
       position absolute
       left 0
       top 0
       z-index 9
-      overflow hidden
-      background #fdd
+      overflow hidden  
       &.in-fixed-table
         box-shadow 0 0 5px rgba(0,0,0,.12)
   .hidden-columns
@@ -278,7 +276,13 @@ table
     border 1px solid #ebeef5
     text-align left
     .cell
-      padding 10px 5px
+      padding 10px 5px  
+  tbody
+    th, td
+      background #fff    
+  thead
+    th, td
+      background #f5f7fa
   .is-left
     text-align left
   .is-right

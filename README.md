@@ -36,8 +36,6 @@ $ npm install vue-snb-table
 Import components to your project:
 
 ``` js
-require('vue-snb-table/dist/index.css');
-
 // in ES6 modules
 import { SnbTable, SnbTableColumn, SnbTableHeader } from 'vue-snb-table';
 
@@ -59,7 +57,6 @@ Vue.component('snb-table-header', SnbTableHeader);
 ### Import using script tag
 
 ``` html
-<link rel="stylesheet" href="../node-modules/vue-snb-table/dist/index.css" charset="utf-8">
 <script src="../node-modules/vue-snb-table/dist/index.js"></script>
 ```
 

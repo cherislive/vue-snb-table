@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    library: 'vue-snb-table',
+    library: 'VueSnbTable',
     libraryTarget: 'umd',
     filename: '[name].js',
   },
@@ -24,9 +24,9 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          extractCSS: true
-        }
+        // options: {
+        //   extractCSS: false
+        // }
       },
       { test: /\.js$/,
         loader: 'babel-loader'

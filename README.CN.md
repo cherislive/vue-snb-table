@@ -1,9 +1,8 @@
-English | [简体中文](./README.CN.md)
+[English](./README.md) | 简体中文
 
-# vue-snb-table
+# vue-snb-table Table 表格
 
-vue-snb-table is a table componen for Vue.js.
-Display multiple data with similar format. You can sort your data in a table.
+Table 表格. 用于展示多条结构类似的数据，可对数据进行排序操作。
 
 [![GitHub stars](https://img.shields.io/github/stars/cherislive/vue-snb-table.svg?style=flat-square)](https://github.com/cherislive/vue-snb-table/stargazers)
 [![Build Status](https://travis-ci.org/cherislive/vue-snb-table.svg?branch=master)](https://travis-ci.org/cherislive/vue-snb-table)
@@ -16,14 +15,13 @@ Display multiple data with similar format. You can sort your data in a table.
 
 
 
-## Demo
+## 预览
 
 ![https://cherislive.github.io/projrct/vue-snb-table/](./20190429-161829.png)
 
-You can see a demo here: [https://cherislive.github.io/projrct/vue-snb-table/](https://cherislive.github.io/projrct/vue-snb-table/)
+页面预览: [https://cherislive.github.io/projrct/vue-snb-table/](https://cherislive.github.io/projrct/vue-snb-table/)
 
-
-## Install
+## 安装
 
 ```bash
 $ npm install vue-snb-table
@@ -101,22 +99,22 @@ Work on a Vue instance:
 
 | Option | Type | Description | Accepted Values | Default |
 | ----- | ----- | ----- | ----- | ----- |
-| data | Array | Table data | - | - |
-| showHeader | Boolean | whether Table header is visible | - | true |
-| headerFixed | Object | whether Table header is fixed | `state`: true/false | null |
-| defaultSort | Object | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | `order`: asc, desc | if `prop` is set, and `order` is not set, then order is default to **ascending** |
-| sortState | Object | set the handle sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | `order`: asc, desc | - |
-| headerColsWidth | Array | columns width | -  | - |
+| data | Array | 显示的数据。 | - | - |
+| showHeader | Boolean | 是否显示表头。 | - | true |
+| headerFixed | Object | 固定表头。 | `state`: true/false | null |
+| defaultSort | Object | 默认的排序列的 `prop` 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序 | `order`: asc, desc | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是**ascending** |
+| sortState | Object | 可以通过该属性设置排序列的 `prop` 和顺序。它的`prop`属性指定排序的列，`order`指定默认排序的顺序 | `order`: asc, desc | - |
+| headerColsWidth | Array | 表头各个列宽。 | -  | - |
 
 ### Events
 
 | Event Name | Description | params |
 | ----- | ----- | ----- |
-| columnsReady | triggers when table element is ready | columns |
-| sortChange | triggers when sort state or sort order changes | {sort: {prop, order}, column} |
-| colsWidth | triggers when table data changes | widths |
-| distanXChange | triggers when drag table rest assured is horizontal | width |
-| rowClick | triggers when clicking a row | row |
+| columnsReady | 当表格的列的数据状态加载完成的时候会触发该事件，该事件用于自定义表头的情况。 | columns |
+| sortChange | 当表格的排序条件发生变化的时候会触发该事件。 | {sort: {prop, order}, column} |
+| colsWidth | 当表格的数据发生变化的时候会触发该事件，返回各个列宽。 | widths |
+| distanXChange | 当拖动表格横向滚动的时候会触发该事件。 | width |
+| rowClick | 当某一行被点击时会触发该事件。| row |
 
 ## Table-column
 
@@ -124,13 +122,13 @@ Work on a Vue instance:
 
 | Option | Type | Description | Accepted Values | Default |
 | ----- | ----- | ----- | ----- | ----- |
-| prop | String | field name. You can also use its alias: property | -  | - |
-| label | String | column label | -  | - |
-| align | String | alignment | left/center/right | left |
-| width | String | column width | -  | - |
-| fixed | String | whether column is fixed. Will be fixed at left if true | true, false | false |
-| sortable | Boolean | whether column can be sorted. Remote sorting can be done by setting this attribute to 'custom' and listening to the sort-change event of Table | true, false | false |
-| formatter | Function(row, column, cellValue, index)	 | function that formats cell content | - | - |
+| prop | String | 对应列内容的字段名，也可以使用 property 属性。 | -  | - |
+| label | String | 显示的标题。 | -  | - |
+| align | String | 对齐方式。 | left/center/right | left |
+| width | String | 对应列的宽度。 | -  | - |
+| fixed | String | 列是否固定在左侧。 | true, false | false |
+| sortable | Boolean | 对应列是否可以排序。 | true, false | false |
+| formatter | Function(row, column, cellValue, index)	 | 用来格式化内容。 | - | - |
 
 ## Table-header
 
@@ -138,18 +136,18 @@ Work on a Vue instance:
 
 | Option | Type | Description | Accepted Values | Default |
 | ----- | ----- | ----- | ----- | ----- |
-| columns | Array | columns | -  | - |
-| colsWidth | Array | columns width | -  | - |
-| distanX | Number | table rest assured is horizontal | left/center/right | left |
-| defaultSort | Object | set the default sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | `order`: asc, desc | if `prop` is set, and `order` is not set, then order is default to **ascending** |
-| sortState | Object | set the handle sort column and order. property `prop` is used to set default sort column, property `order` is used to set default sort order | `order`: asc, desc | - |
+| columns | Array | 各个列属性。 | -  | - |
+| colsWidth | Array | 各个列宽。 | -  | - |
+| distanX | Number | 表格横向滚动的距离。 | left/center/right | left |
+| defaultSort | Object | 默认的排序列的 `prop` 和顺序。它的`prop`属性指定默认的排序的列，`order`指定默认排序的顺序 | `order`: asc, desc | 如果只指定了`prop`, 没有指定`order`, 则默认顺序是ascending |
+| sortState | Object | 可以通过该属性设置排序列的 `prop` 和顺序。它的`prop`属性指定排序的列，`order`指定默认排序的顺序 | `order`: asc, desc | - |
 
 ### Events
 
 | Event Name | Description | params |
 | ----- | ----- | ----- |
-| sortChange | triggers when sort state or sort order changes | {sort: {prop, order}, column} |
-| headerColsWidth | triggers when table columns changes | widths |
+| sortChange | 当表格的排序条件发生变化的时候会触发该事件。 | {sort: {prop, order}, column} |
+| headerColsWidth | 表头各个列宽。当表格的渲染完成的时候会触发该事件。 | widths |
 
 ## Development
 

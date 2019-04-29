@@ -1,14 +1,17 @@
-const { resolve } = require('path');
+const path = require('path');
 const ExtractTextPlugin = require('./node_modules/extract-text-webpack-plugin/dist/cjs')
 
 module.exports = {
   mode: 'production',
-  entry: './src/',
+  entry: {
+    'index': './src/index.js',
+    'example': './example/index.js',
+  },
   output: {
-    library: 'VueSnbTable',
-    libraryTarget: 'commonjs2',
-    filename: 'vue-snb-table.js',
-    path: resolve('dist'),
+    path: path.resolve(__dirname, 'dist'),
+    library: 'vue-snb-table',
+    libraryTarget: 'umd',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -31,6 +34,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('vue-snb-table.css')
+    new ExtractTextPlugin('[name].css'),
   ]
 };

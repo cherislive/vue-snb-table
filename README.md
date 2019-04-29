@@ -16,7 +16,7 @@ Display multiple data with similar format. You can sort your data in a table.
 
 ## Demo
 
-![https://cherislive.github.io/projrct/vue-snb-table/](./dist/20190321-173707.png)
+![https://cherislive.github.io/projrct/vue-snb-table/](./dist/20190429-161829.png)
 
 ## Install
 

@@ -1,12 +1,12 @@
 {
   "name": "vue-snb-table",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "Display multiple data with similar format. You can sort your data in a table.",
   "main": "dist/vue-snb-table.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.example.config.js --inline --hot",
     "remote-dev": "npm run dev --host",
-    "build": "webpack -p",
+    "build": "rm -rf dist && webpack -p",
     "release": "npm publish",
     "prepare": "npm run build"
   },

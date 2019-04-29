@@ -4,6 +4,9 @@
     @touchstart="touchStartHandle"
     @touchmove="touchMoveHandle"
     @touchend="touchEndHandle"
+    @mousemove="mousemoveHandle"
+    @mouseup="mouseupHandle"
+    @mousedown="mousedownHandle"
     @webkit-transition-end="onTransitionEnd()"
     @transitionend="onTransitionEnd()"
     :style="{
@@ -115,7 +118,8 @@ export default {
       let _width = 0;
       this.colsWidth.map(width => {
         _width = _width + width * 1;
-      })
+      });
+      _width = _width ? _width + 1 : _width;
       return Math.ceil(Math.max(_width, this.tableWrapperWidth));
     },
     overflowWidth () {
@@ -129,7 +133,7 @@ export default {
   },
   mounted () {
     this.tableContnt = this.$refs.tableContnt;
-    this.setTableWrapperWidth();  // 设置表格实际宽度
+    this.setTableWrapperWidth(); // 设置表格实际宽度
     this.getHeaderCellsWidth();
   },
   methods: {
@@ -157,7 +161,7 @@ export default {
           _colWidth.push(_childDomArr[i].offsetWidth);
         }
         this.$emit('headerColsWidth', _colWidth);
-      })    
+      }); 
     },
     // 数据排序
     handleHeadSortClick (column) {
@@ -170,23 +174,57 @@ export default {
       this.tableContnt.style['transition'] = 'none';
     },
     /**
+     * mousedown handle
+     */
+    mousedownHandle (event) {
+      this.startHandle(event);
+    },
+    /**
+     * mousemove handle
+     */
+    mousemoveHandle (event) {
+      this.moveHandle(event);
+    },
+    /**
+     * mouseup handle
+     */
+    mouseupHandle (event) {
+      this.endHandle(event);
+    },
+    /**
      * touchstart handle
      */
     touchStartHandle (event) {
-      if (this.contentType !== 'body') return;
       let touch = event.touches[0];
-      this.start.x = touch.pageX;
-      this.start.y = touch.pageY;
+      this.startHandle(touch);
     },
     /**
      * touchmove handle
      */
     touchMoveHandle (event) {
-      if (this.contentType !== 'body') return;
       let touch = event.touches[0];
+      this.moveHandle(touch);
+    },
+    /**
+     * touchend handle
+     */
+    touchEndHandle (event) {
+      let touch = event.changedTouches[0];
+      this.endHandle(touch);
+    },
+    onTransitionEnd () {
+      this.isAnimation = false;
+    },
+    startHandle (offset) {
+      if (this.contentType !== 'body') return;
       this.isAnimation = true;
-      this.end.x = touch.pageX;
-      this.end.y = touch.pageY;
+      this.start.x = offset.pageX;
+      this.start.y = offset.pageY;
+    },
+    moveHandle (offset) {
+      if (this.contentType !== 'body' || !this.isAnimation) return;
+      this.end.x = offset.pageX;
+      this.end.y = offset.pageY;
       this.getTouchDirection(this.end.x - this.start.x, this.end.y - this.start.y);
       if (this.direction) {
         let _distanX = this.end.x - this.start.x;
@@ -195,21 +233,14 @@ export default {
         this.$emit('translateChange', _distanX, this.contentType);
       }
     },
-    /**
-     * touchend handle
-     */
-    touchEndHandle (event) {
+    endHandle (offset) {
       if (this.contentType !== 'body') return;
-      let touch = event.changedTouches[0];
       this.isAnimation = false;
-      this.end.x = touch.pageX;
+      this.end.x = offset.pageX;
       let _distanX = this.distan.x + (this.end.x - this.start.x);
       _distanX = Math.min(_distanX, 0);
       _distanX = Math.max(this.overflowWidth * -1, _distanX);
       this.distan.x = _distanX;
-    },
-    onTransitionEnd () {
-      this.isAnimation = false;
     },
     /**
      * getAngle 计算角度

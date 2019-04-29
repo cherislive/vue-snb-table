@@ -1,9 +1,8 @@
-
 export default {
   functional: true,
   props: ['column', 'row', 'colspan'],
   render(createElement, { props }) {
-    const column= props.column;
+    const column = props.column;
     const data = {};
     data.class = 'cell';
     if (column.$scopedSlots.default) {

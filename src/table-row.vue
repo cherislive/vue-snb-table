@@ -63,15 +63,14 @@ export default {
           _colWidth.push(_childDomArr[i].offsetWidth);
         }
         this.$emit('colsWidth', _colWidth);
-      })    
+      });
     },
     minWidth (width) {
       if (width) {
-        return { 'min-width': `${width}px` }
+        return { 'min-width': `${width}px` };
       }
     },
     rowClick () {
-      console.log(this.columns)
       this.$emit('rowClick', this.row);
     }
   },

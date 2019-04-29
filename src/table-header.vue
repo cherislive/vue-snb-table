@@ -1,7 +1,7 @@
 <template>
 <div class="ui-snb-table">
   <div class="table-fixed">
-    <table-content class="table-fixed-top"
+    <table-content class="table-top"
       contentType="header"
       :panes="columns"
       :sort="sort"
@@ -11,7 +11,7 @@
       @headerColsWidth="setHeaderColsWidth"
       @handleHeadSortClick="handleHeadSortClick"
     />
-    <table-content class="table-fixed-left"
+    <table-content class="table-fixed-left"  v-if="hasFixedCell"
       contentType="leftFixed"
       :showHeader="true"
       :panes="columns"
@@ -84,13 +84,32 @@ export default {
     this.sort.order = this.defaultSort ? this.defaultSort.order : '';
     this.sort.defaultProp = this.defaultSort ? this.defaultSort.prop : '';
   },
-  async mounted () {
+  mounted () {
+    this.reductionColumns(this.columns);
   },
   methods: {
+    // 表头数据整理 是否存在固定列
+    reductionColumns (columns = []) {
+      let _columns = [];
+      let fixedCell = null;
+      if (columns && columns.length) {
+        columns.map(item => {
+          if (item.fixed && !fixedCell) {
+            fixedCell = item || {};
+          } else {
+            _columns.push(item);            
+          }
+        });
+        if (fixedCell) {
+          _columns.unshift(fixedCell);
+        }
+      }
+      this.hasFixedCell = !!fixedCell;
+    },
     // 数据排序
     handleHeadSortClick (column) {
       if (this.sort.prop !== column.prop) {
-        this.sort.prop =  column.prop;
+        this.sort.prop = column.prop;
         this.sort.order = 'desc';
       } else {
         this.sort.order = this.sort.order || 'desc';
@@ -103,6 +122,10 @@ export default {
     },
   },
   watch: {
+    // 是否存在固定列
+    columns (columns) {
+      this.reductionColumns(columns);
+    },
     // 定义排序显示状态
     sortState (sort = {}) {
       this.sort.order = sort.order || this.defaultSort.order || '';

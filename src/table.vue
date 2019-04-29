@@ -14,6 +14,7 @@
       :class="{
         'in-fixed-header': inHeaderFixed
       }"
+      :style="fixedTopStyle"
     />
     <table-content class="table-fixed-left" v-if="hasFixedCell"
       contentType="leftFixed"
@@ -113,6 +114,16 @@ export default {
     inHeaderFixed () {
       let _fheaderFixedOpt = this.headerFixed || {};
       return _fheaderFixedOpt.state;
+    },
+    fixedTopStyle () {
+      let _stype = {};
+      if (this.inHeaderFixed) {
+        _stype.position = 'fixed';
+        _stype.left = 0;
+        _stype.top = `${this.headerFixed.top || 0}px`;
+        _stype.zIndex = 20;
+      }
+      return _stype;
     }
   },
   created() {
@@ -120,9 +131,9 @@ export default {
     this.sort.order = this.defaultSort ? this.defaultSort.order : '';
     this.sort.defaultProp = this.defaultSort ? this.defaultSort.prop : '';
   },
-  async mounted () {
-    await this.calcPaneInstances(); // 设置表头数据
-    await this.mapDataToRows();    // 整理 tbody 数据
+  mounted () {
+    this.calcPaneInstances(); // 设置表头数据
+    this.mapDataToRows(); // 整理 tbody 数据
     if (this.headerColsWidth && this.headerColsWidth.length) {
       this.emitColsWidth();
     }
@@ -133,7 +144,7 @@ export default {
       if (this.$slots.default) {
         const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
           vnode.componentOptions && 
-          vnode.componentOptions.Ctor.options.name === 'snb-table-column'
+          (vnode.componentOptions.Ctor.options.name === 'snb-table-column' || vnode.componentOptions.tag === 'SnbTableColumn')
         );
         const panes = paneSlots.map(({ componentInstance }) => componentInstance);
         const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]));
@@ -179,7 +190,7 @@ export default {
     // 数据排序
     handleHeadSortClick (column) {
       if (this.sort.prop !== column.prop) {
-        this.sort.prop =  column.prop;
+        this.sort.prop = column.prop;
         this.sort.order = 'asc';
       } else {
         this.sort.order = this.sort.order || 'asc';
@@ -220,7 +231,7 @@ export default {
   },
   watch: {
     data () {
-      this.mapDataToRows();    // 整理 tbody 数据
+      this.mapDataToRows(); // 整理 tbody 数据
     },
     // 定义排序显示状态
     sortState (sort = {}) {
@@ -233,6 +244,9 @@ export default {
 };
 </script>
 <style lang="stylus">
+table
+  border-collapse:collapse
+  border-spacing:0
 .ui-snb-table
   position relative
   width 100%
@@ -261,7 +275,7 @@ export default {
     margin 0
     padding 0   
     white-space nowrap
-    border 1px solid #ccc
+    border 1px solid #ebeef5
     text-align left
     .cell
       padding 10px 5px

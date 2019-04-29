@@ -1,13 +1,13 @@
 const { resolve } = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('./node_modules/extract-text-webpack-plugin/dist/cjs')
 
 module.exports = {
   mode: 'production',
   entry: './src/',
   output: {
-    library: 'VueMintSlider',
+    library: 'VueSnbTable',
     libraryTarget: 'commonjs2',
-    filename: 'vue-mint-slider.js',
+    filename: 'vue-snb-table.js',
     path: resolve('dist'),
   },
   module: {
@@ -31,6 +31,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('vue-mint-slider.css')
+    new ExtractTextPlugin('vue-snb-table.css')
   ]
 };

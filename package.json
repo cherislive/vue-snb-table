@@ -1,8 +1,8 @@
 {
-  "name": "vue-mint-slider",
-  "version": "3.0.3",
-  "description": "A touch slider for vue.js.",
-  "main": "dist/vue-mint-slider.js",
+  "name": "vue-snb-table",
+  "version": "2.6.1",
+  "description": "Display multiple data with similar format. You can sort your data in a table.",
+  "main": "dist/vue-snb-table.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.example.config.js --inline --hot",
     "remote-dev": "npm run dev --host",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cherislive/vue-mint-slider.git"
+    "url": "https://github.com/cherislive/vue-snb-table.git"
   },
   "babel": {
     "presets": [
@@ -24,8 +24,8 @@
     "src"
   ],
   "keywords": [
-    "swipe",
-    "slider",
+    "table",
+    "ui-table",
     "vue"
   ],
   "author": "i@cheris.cn",
@@ -49,5 +49,8 @@
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "highlight.js": "^9.15.6",
+    "lodash": "^4.17.11"
+  }
 }

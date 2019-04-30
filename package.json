@@ -1,6 +1,6 @@
 {
   "name": "vue-snb-table",
-  "version": "2.6.5",
+  "version": "2.6.6",
   "description": "Display multiple data with similar format. You can sort your data in a table.",
   "main": "dist/index.js",
   "scripts": {
